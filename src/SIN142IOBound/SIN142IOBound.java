@@ -1,6 +1,10 @@
 /**
  * Main
  */
+
+ //PS: Clonar diretório e fazer commit apenas da pasta /src.
+ //Crie um projeto SIN-142-Projeto-Avaliativo e um package chamado SIN142IOBound para rodar o código abaixo.
+ 
 package SIN142IOBound;
 
 /**
