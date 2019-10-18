@@ -46,7 +46,7 @@ public class SIN142IOBound {
 	 */
 	public static void main(String[] args) {
 		//System.out.printf("Hello World");
-		ArrayList<Integer> lista = new ArrayList<Integer>();
+		//ArrayList<Integer> lista = new ArrayList<Integer>();
 		//Testando método criarDiretorio.
 		String path = criarDiretorio();
 	}
