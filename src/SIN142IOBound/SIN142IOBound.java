@@ -26,7 +26,6 @@ public class SIN142IOBound {
 	* Método para criar diretório /arquivos/ na pasta do programa.
 	* Retorno: string com o caminho da pasta.
 	*/
-
 	public static String criarDiretorio() {
 		// Pega endereço do aplicativo.
 		String path = System.getProperty("user.dir");
