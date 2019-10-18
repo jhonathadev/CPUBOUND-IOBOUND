@@ -12,10 +12,15 @@ import java.util.*;
 import java.io.*;
 
 public class SIN142IOBound {
-	/*public static ArrayList<Integer> lerArquivo(String local) {
-		return 1
+	//Um método para ler arquivos (ainda não implementado).
+	/*public static ArrayList<Integer> lerArquivo(String path) {
+		return 0
 	}*/
 	
+	/*
+	* Método para criar diretório /arquivos/ na pasta do programa.
+	* Retorno: string com o caminho da pasta.
+	*/
 	public static String criarDiretorio() {
 		// Pega endereço do aplicativo.
 		String path = System.getProperty("user.dir");
