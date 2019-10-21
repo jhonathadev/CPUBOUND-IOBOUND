@@ -16,11 +16,33 @@ import java.util.*;
 import java.io.*;
 
 public class SIN142IOBound {
-	/*Um método para ler arquivos (ainda não implementado).
-	 *public static ArrayList<Integer> lerArquivo(String path) {
-	 *	return 0
-	 *}
-	 */
+	//Um método para ler arquivos.
+	public static ArrayList<Integer> lerArquivo(String path, int i, ArrayList<Integer> temp) throws IOException {
+		int valor;
+		BufferedReader leitor;
+		leitor = new BufferedReader(new FileReader(path + Integer.toString(i) + ".txt"));
+		String linha = leitor.readLine();
+		while(linha != null)
+		{
+			valor = Integer.valueOf(linha);
+			temp.add(valor);
+			linha = leitor.readLine();
+		}
+		leitor.close();
+		return temp;
+	}
+	
+	//Método para impressão de ArrayList.
+	public static void printArray(ArrayList<Integer> lista) {
+		int n;
+		n = lista.size();
+		int i;
+		for(i=0; i<n; i++)
+		{
+			System.out.printf("%d ", lista.get(i));
+		}
+		return;
+	}
 
 	/*
 	 * Método para criar diretório /arquivos/ na pasta do programa.
@@ -81,7 +103,7 @@ public class SIN142IOBound {
 	 */
 	public static void main(String[] args) {
 		//System.out.printf("Hello World");
-		//ArrayList<Integer> lista = new ArrayList<Integer>();
+		ArrayList<Integer> lista = new ArrayList<Integer>();
 
 		//Testando método criarDiretorio.
 		File file;
@@ -114,5 +136,18 @@ public class SIN142IOBound {
 				}//Exception
 			}//else	
 		}//for
+		
+		//Leitura dos arquivos. (Pode ser melhorado futuramente).
+		//O for é necessário para múltiplos arquivos.
+		for(i = 0; i<11; i++)
+		{
+			try {
+				lista = lerArquivo(path, i, lista);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println();
+		printArray(lista);
 	}//main
 }//classe principal
