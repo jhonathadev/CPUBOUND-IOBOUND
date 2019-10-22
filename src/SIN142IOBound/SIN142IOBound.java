@@ -97,26 +97,25 @@ public class SIN142IOBound {
 		//		    return file;
 		//		}
 	}//fim método criarArquivo.
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		//System.out.printf("Hello World");
-		ArrayList<Integer> lista = new ArrayList<Integer>();
-
-		//Testando método criarDiretorio.
+	
+	//Um método para excluir arquivos.
+	public static void deletaArquivo(String path, int i) throws IOException
+	{
+		File file = new File(path + Integer.toString(i) + ".txt");
+		if(file.delete()) {
+			System.out.printf("\nArquivo %s deletado.", file.getName());
+		}
+		else {
+			System.out.println("Arquivo não deletado: algo deu errado.");
+		}
+	}
+	
+	//Um método para criar N arquivos
+	//path = caminho do diretório.
+	public static void criarVariosArquivos(String path) throws IOException
+	{
 		File file;
 		int i;
-		String path = criarDiretorio();
-
-		/*
-		 * Teste: Criando 10 arquivos com nome {número de 0 a 10}.txt
-		 * e escrevendo nestes arquivos o número de 0 a 10 correspondente ao
-		 * seu nome.
-		 * 
-		 * PS:. Isso pode virar um método futuramente.
-		 */
 		for(i=0; i<11; i++)
 		{
 			file = criarArquivo(i, path);
@@ -126,28 +125,89 @@ public class SIN142IOBound {
 			}//if
 			else {
 				FileWriter writer;
-				try {
-					writer = new FileWriter(file);
-					writer.write(Integer.toString(i));
-					writer.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}//Exception
+				writer = new FileWriter(file);
+				writer.write(Integer.toString(i));
+				writer.close();
 			}//else	
 		}//for
-		
-		//Leitura dos arquivos. (Pode ser melhorado futuramente).
-		//O for é necessário para múltiplos arquivos.
+		return;
+	}//fim da função
+	
+	//Uma função para ler N arquivos.
+	//Retorna uma ArrayList atualizada com todos os arquivos lidos.
+	public static ArrayList<Integer> lerVariosArquivos(String path) throws IOException
+	{
+		ArrayList<Integer> lista = new ArrayList<Integer>();
+		int i;
 		for(i = 0; i<11; i++)
 		{
-			try {
-				lista = lerArquivo(path, i, lista);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			lista = lerArquivo(path, i, lista);
 		}
+		return lista;
+	}
+	/**
+	 * @param args
+	 * @throws IOException 
+	 */
+	public static void main(String[] args) throws IOException {
+		//Variáveis
+		ArrayList<Integer> lista = new ArrayList<Integer>();
+
+		//Testando método criarDiretorio.
+//		File file;
+//		int i;
+		String path = criarDiretorio();
+		
+		/*
+		 * Teste: Criando 10 arquivos com nome {número de 0 a 10}.txt
+		 * e escrevendo nestes arquivos o número de 0 a 10 correspondente ao
+		 * seu nome.
+		 */
+		
+//		for(i=0; i<11; i++)
+//		{
+//			file = criarArquivo(i, path);
+//			if(file == null) {
+//				System.out.printf("\nErro na criação do arquivo %d.", i);
+//				continue;
+//			}//if
+//			else {
+//				FileWriter writer;
+//				try {
+//					writer = new FileWriter(file);
+//					writer.write(Integer.toString(i));
+//					writer.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}//Exception
+//			}//else	
+//		}//for
+		
+		/*
+		* Leitura dos arquivos. (Pode ser melhorado futuramente).
+		* O for é necessário para múltiplos arquivos.
+		*/
+//		for(i = 0; i<11; i++)
+//		{
+//			try {
+//				lista = lerArquivo(path, i, lista);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
+		
+		//Testando novas funções.
+		
+		try {
+			criarVariosArquivos(path);
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Erro: IOException.");
+		}//Exception
+		lista = lerVariosArquivos(path);
 		System.out.println();
 		printArray(lista);
+		deletaArquivo(path, 10);
+		//lista = lerVariosArquivos(path);
 	}//main
 }//classe principal
