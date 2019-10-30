@@ -33,7 +33,7 @@ public class SIN142IOBound {
 	 * Método para criar diretório /arquivos/ na pasta do programa.
 	 * Retorno: string com o caminho da pasta.
 	 */
-	public static String criarDiretorio() {
+	public static String criarDiretorio() throws IOException {
 		// Pega endereço do aplicativo.
 		String path = System.getProperty("user.dir");
 		// Cria diretório em path + /arquivos/. Path = pasta do projeto.
@@ -44,15 +44,14 @@ public class SIN142IOBound {
 				return path + "/arquivos/";
 			} 
 			else {
-				System.out.println("Exception: IOException.");
-				return path;
+				throw new IOException("\nDiretório não foi criado corretamente.");
 			}
 		}
 		else {
 			System.out.println("Diretório já existe!");
 			return path + "/arquivos/";
 		}
-	}	
+	}//Fim criarDiretorio	
 	
 	/**
 	 * @param args
@@ -61,40 +60,38 @@ public class SIN142IOBound {
 	public static void main(String[] args) throws IOException {
 		//Variáveis
 		ArrayList<Integer> lista = new ArrayList<Integer>();
-		File file;
+//		File file;
 //		int i;
-		String path = criarDiretorio();
-		
-		/*
-		 * Testando classes novas.
-		 * 1 - Cria arquivos.
-		 * 2 - Lê arquivos.
-		 * 3 - Deleta arquivos.
-		 */
-		
-		// 1 - Criando vários arquivos: retorno void.
-		CriadorArquivos criador = new CriadorArquivos();
 		try {
+			String path = criarDiretorio();
+			/*
+			 * Testando classes novas.
+			 * 1 - Cria arquivos.
+			 * 2 - Lê arquivos.
+			 * 3 - Deleta arquivos.
+			 */
+			
+			// 1 - Criando vários arquivos: retorno void.
+			CriadorArquivos criador = new CriadorArquivos();
 			criador.criarVariosArquivos(path);
-		} catch(IOException e) {
+			
+			// 2 - Lendo arquivos: retorno ArrayList.
+			LeitorArquivos leitor = new LeitorArquivos();
+			lista = leitor.lerVariosArquivos(path);
+			
+			// Verificando resultado //
+			System.out.println();
+			printArray(lista);
+			
+			// 3 - Apagando arquivos: retorno void.
+			ApagadorArquivos apagador = new ApagadorArquivos();
+			apagador.deletaArquivo(path, 1);
+			/*
+			 * Implementando Threads.
+			 */
+		}//try
+		catch(IOException e) {
 			System.out.println(e);
-		}
-		// 2 - Lendo arquivos: retorno ArrayList.
-		LeitorArquivos leitor = new LeitorArquivos();
-		lista = leitor.lerVariosArquivos(path);
-		// Verificando resultado //
-		System.out.println();
-		printArray(lista);
-		
-		// 3 - Apagando arquivos: retorno void.
-		ApagadorArquivos apagador = new ApagadorArquivos();
-		try {
-		apagador.deletaArquivo(path, 1);
-		} catch(IOException e) {
-			System.out.println(e);
-		}
-		/*
-		 * Implementando Threads.
-		 */
+		}//catch
 	}//main
 }//classe principal

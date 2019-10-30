@@ -10,15 +10,19 @@ public class LeitorArquivos {
 	public ArrayList<Integer> lerArquivo(String path, int i, ArrayList<Integer> temp) throws IOException {
 		int valor;
 		BufferedReader leitor;
-		leitor = new BufferedReader(new FileReader(path + Integer.toString(i) + ".txt"));
-		String linha = leitor.readLine();
-		while(linha != null)
-		{
-			valor = Integer.valueOf(linha);
-			temp.add(valor);
-			linha = leitor.readLine();
+		try {
+			leitor = new BufferedReader(new FileReader(path + Integer.toString(i) + ".txt"));
+			String linha = leitor.readLine();
+			while(linha != null)
+			{
+				valor = Integer.valueOf(linha);
+				temp.add(valor);
+				linha = leitor.readLine();
+			}
+			leitor.close();
+		} catch(IOException e) {
+			throw new IOException("\nErro na leitura do arquivo.");
 		}
-		leitor.close();
 		return temp;
 	}//fim lerArquivo
 	
