@@ -44,7 +44,7 @@ public class SIN142IOBound {
 				return path + "/arquivos/";
 			} 
 			else {
-				System.out.println("Falha para criar o diretório.");
+				System.out.println("Exception: IOException.");
 				return path;
 			}
 		}
@@ -72,21 +72,27 @@ public class SIN142IOBound {
 		 * 3 - Deleta arquivos.
 		 */
 		
-//		// 1 - Criando vários arquivos: retorno void.
-//		CriadorArquivos criador = new CriadorArquivos();
-//		criador.criarVariosArquivos(path);
-//		
-//		// 2 - Lendo arquivos: retorno ArrayList.
-//		LeitorArquivos leitor = new LeitorArquivos();
-//		lista = leitor.lerVariosArquivos(path);
-//		// Verificando resultado //
-//		System.out.println();
-//		printArray(lista);
-//		
-//		// 3 - Apagando arquivos: retorno void.
-//		ApagadorArquivos apagador = new ApagadorArquivos();
-//		apagador.deletaArquivo(path, 1);
+		// 1 - Criando vários arquivos: retorno void.
+		CriadorArquivos criador = new CriadorArquivos();
+		try {
+			criador.criarVariosArquivos(path);
+		} catch(IOException e) {
+			System.out.println(e);
+		}
+		// 2 - Lendo arquivos: retorno ArrayList.
+		LeitorArquivos leitor = new LeitorArquivos();
+		lista = leitor.lerVariosArquivos(path);
+		// Verificando resultado //
+		System.out.println();
+		printArray(lista);
 		
+		// 3 - Apagando arquivos: retorno void.
+		ApagadorArquivos apagador = new ApagadorArquivos();
+		try {
+		apagador.deletaArquivo(path, 1);
+		} catch(IOException e) {
+			System.out.println(e);
+		}
 		/*
 		 * Implementando Threads.
 		 */

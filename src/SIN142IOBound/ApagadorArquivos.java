@@ -3,18 +3,18 @@ package SIN142IOBound;
 import java.io.File;
 import java.io.IOException;
 
-public class ApagadorArquivos {
+public class ApagadorArquivos{
 	//Um método para excluir arquivos.
 	public void deletaArquivo(String path, int i) throws IOException
 	{
 		File file = new File(path + Integer.toString(i) + ".txt");
-		if(file.delete()) {
+		file.delete();
+		if(!file.exists()) {
 			System.out.printf("\nArquivo %s deletado.", file.getName());
 			return;
 		}
 		else {
-			System.out.println("Arquivo não deletado: algo deu errado.");
-			return;
+			throw new IOException("\nErro, arquivo não foi deletado.");
 		}
 	}//Fim deletaArquivo
 }//Fim da classe
