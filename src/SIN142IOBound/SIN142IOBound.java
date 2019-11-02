@@ -72,20 +72,24 @@ public class SIN142IOBound {
 			 */
 			
 			// 1 - Criando vários arquivos: retorno void.
+//			CriadorArquivos criador = new CriadorArquivos();
+//			criador.criarVariosArquivos(path);
+			
 			CriadorArquivos criador = new CriadorArquivos();
-			criador.criarVariosArquivos(path);
+			criador.setPath(path);
+			criador.criarVariosArquivos();
 			
-			// 2 - Lendo arquivos: retorno ArrayList.
-			LeitorArquivos leitor = new LeitorArquivos();
-			lista = leitor.lerVariosArquivos(path);
-			
-			// Verificando resultado //
-			System.out.println();
-			printArray(lista);
-			
-			// 3 - Apagando arquivos: retorno void.
-			ApagadorArquivos apagador = new ApagadorArquivos();
-			apagador.deletaArquivo(path, 1);
+//			// 2 - Lendo arquivos: retorno ArrayList.
+//			LeitorArquivos leitor = new LeitorArquivos();
+//			lista = leitor.lerVariosArquivos(path);
+//			
+//			// Verificando resultado //
+//			System.out.println();
+//			printArray(lista);
+//			
+//			// 3 - Apagando arquivos: retorno void.
+//			ApagadorArquivos apagador = new ApagadorArquivos();
+//			apagador.deletaArquivo(path, 1);
 			/*
 			 * Implementando Threads.
 			 */

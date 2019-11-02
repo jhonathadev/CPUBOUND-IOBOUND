@@ -1,43 +1,81 @@
 package SIN142IOBound;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.*;
+import java.util.ArrayList;
 
-public class CriadorArquivos {
+public class CriadorArquivos implements Runnable{
+	public int i;
+	public static ArrayList<File> lista_files = new ArrayList<File>();
+	public File file = null;
+	
+	//Construtores;
+	public CriadorArquivos(int i) {
+		super();
+		this.i = i;
+	}
+	
+	public CriadorArquivos() {}
+	
+	public CriadorArquivos(int i, String caminho) {
+		super();
+		path = caminho;
+		this.i = i;
+	}
+	
+	//Get/Set
+	
+	public int getI() {
+		return i;
+	}
+
+	public void setI(int i) {
+		this.i = i;
+	}
+
+	public static String path;
+	
+	public String getPath() {
+		return path;
+	}
+	
+	public static void setPath(String caminho) {
+		path = caminho;
+	}
+	
 	/*
 	 * Método que cria um arquivo com um nome numérico.
 	 * num_arquivo é o parâmetro que define como se chamará o arquivo.
 	 * path é o destino do arquivo (veja criarDiretorio()).
 	 */
-	public File criarArquivo(int num_arquivo, String path) throws IOException
-	{
-		File file = new File(path + Integer.toString(num_arquivo) + ".txt");
-		file.createNewFile();
-		if(file.exists()) {
-			System.out.printf("\nArquivo %d.txt criado.", num_arquivo);
-			return file;
+	
+	@Override
+	public void run() {
+		file = new File(path + Integer.toString(i) + ".txt");
+		try {
+			file.createNewFile();
+			System.out.printf("\nArquivo %d.txt criado.", i);
+			lista_files.add(file);
+			return;
 		}
-		else {
-			throw new IOException("\nArquivo .txt não pôde ser criado.");
+		catch(IOException e) {
+			System.out.println("\nArquivo .txt não pôde ser criado.");
 		}	
-	}//Fim criarArquivo
+		return;
+	}
 	
 	//Um método para criar N arquivos
 	//path = caminho do diretório.
-	public void criarVariosArquivos(String path) throws IOException
+	
+	//Chamar passando caminho.
+	public ArrayList<File> criarVariosArquivos() throws IOException
 	{
-		File file;
-		int i;
-		for(i=0; i<11; i++)
+		for(i=0; i<501; i++)
 		{
-			file = criarArquivo(i, path);
-			FileWriter writer;
-			writer = new FileWriter(file);
-			writer.write(Integer.toString(i));
-			writer.close();
+			CriadorArquivos criador1 = new CriadorArquivos(i);
+			Thread criador_thread = new Thread(criador1);
+			criador_thread.start();
 		}//for
-		return;
+		return lista_files;
 	}//fim criarVariosArquivos
 }//Fim classe
