@@ -8,6 +8,7 @@ public class CriadorArquivos implements Runnable{
 	public int i;
 	public static ArrayList<File> lista_files = new ArrayList<File>();
 	public File file = null;
+	public static String path;
 	
 	//Construtores;
 	public CriadorArquivos(int i) {
@@ -32,8 +33,6 @@ public class CriadorArquivos implements Runnable{
 	public void setI(int i) {
 		this.i = i;
 	}
-
-	public static String path;
 	
 	public String getPath() {
 		return path;

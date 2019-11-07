@@ -59,7 +59,7 @@ public class SIN142IOBound {
 	 */
 	public static void main(String[] args) throws IOException {
 		//Variáveis
-		ArrayList<Integer> lista = new ArrayList<Integer>();
+		ArrayList<File> lista_files = new ArrayList<File>();
 //		File file;
 //		int i;
 		try {
@@ -76,8 +76,13 @@ public class SIN142IOBound {
 //			criador.criarVariosArquivos(path);
 			
 			CriadorArquivos criador = new CriadorArquivos();
-			criador.setPath(path);
-			criador.criarVariosArquivos();
+			CriadorArquivos.setPath(path);
+			lista_files = criador.criarVariosArquivos();
+			
+			//1.5 - Escrevendo nos arquivos criados.
+			
+			EscreveArquivosCriados escritor = new EscreveArquivosCriados(lista_files);
+			escritor.escreveVariosArquivos(lista_files);
 			
 //			// 2 - Lendo arquivos: retorno ArrayList.
 //			LeitorArquivos leitor = new LeitorArquivos();
