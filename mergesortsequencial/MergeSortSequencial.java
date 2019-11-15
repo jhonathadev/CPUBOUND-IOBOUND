@@ -1,5 +1,4 @@
 package mergesortsequencial;
-
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -7,12 +6,12 @@ import java.util.Scanner;
 public class MergeSortSequencial {
     public static void main(String[] args) {
         MergeSort m = new MergeSort();
-        Random r =  new Random(25);//para gerar numeros aleatorios
+        Random r =  new Random(25); //para gerar numeros aleatorios
         Scanner s = new Scanner(System.in);
         Menu menu =  new Menu();
-        long tinicial, tfinal;//medir o tempo de execução
-        int opcao = 1;//registrar opcao escolhida
-        int i = 0;//contador
+        long tinicial, tfinal; //medir o tempo de execução
+        int opcao = 1; //registrar opcao escolhida
+        int i = 0; //contador
         
         menu.intro();
         s.nextLine();
