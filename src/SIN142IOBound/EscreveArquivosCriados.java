@@ -10,6 +10,7 @@ public class EscreveArquivosCriados implements Runnable{
 	public int i=0;
 	public static ArrayList<File> lista_files = new ArrayList<File>();
 	private static Random gerador = new Random(10);
+	public boolean status;
 	
 	//Get-Sets
 	public int getI() {
@@ -43,12 +44,24 @@ public class EscreveArquivosCriados implements Runnable{
 	public void escreveVariosArquivos(ArrayList<File> lista_par) throws IOException
 	{
 		lista_files = lista_par;
-		for(i=0; i<501; i++)
+		for(i=0; i<99990; i++)
 		{
 			EscreveArquivosCriados escritor1 = new EscreveArquivosCriados(i);
 			Thread escritor_thread = new Thread(escritor1);
 			escritor_thread.start();
 		}//for
+		for(i=99990; i<100000; i++) {
+			EscreveArquivosCriados escritor1 = new EscreveArquivosCriados(i);
+			Thread escritor_thread = new Thread(escritor1);
+			escritor_thread.start();
+			try {
+				escritor_thread.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		status = true;
 		return;
 	}//fim criarVariosArquivos
 	
@@ -66,8 +79,25 @@ public class EscreveArquivosCriados implements Runnable{
 		}//Try
 		catch(IOException e){
 			System.out.println("IOExcepetion.");
+			run();
 		}//Catch1 = IOException
 		catch(NullPointerException e){
+			/*
+			 * Corrige caminho.
+			 * Tem uma brincadeirinha com cores aqui. Só funciona compilando em terminal.
+			**/
+			final String ANSI_BRIGHT_RED = "\u001B[91m";
+			final String ANSI_RESET  = "\u001B[0m";
+			String[] path = lista_files.get(0).getPath().split("0.txt");
+			path[0] = path[0] + Integer.toString(i) + ".txt";
+			System.out.printf(ANSI_BRIGHT_RED + "\nNullPointerException. %d: %s" + ANSI_RESET, i, path[0]);
+			File recover_file = new File(path[0]);
+			lista_files.set(i, recover_file);
+			
+			//Tenta de novo;
+			run();
+		}//Catch2 = NullPointerException
+		catch(IndexOutOfBoundsException e){
 			/*
 			 * Corrige caminho.
 			 * Tem uma brincadeirinha com cores aqui. Só funciona compilando em terminal.

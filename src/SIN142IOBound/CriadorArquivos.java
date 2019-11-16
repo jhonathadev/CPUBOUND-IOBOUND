@@ -2,13 +2,12 @@ package SIN142IOBound;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class CriadorArquivos implements Runnable{
 	public int i;
-	public static ArrayList<File> lista_files = new ArrayList<File>();
 	public File file = null;
 	public static String path;
+	public boolean status;
 	
 	//Construtores;
 	public CriadorArquivos(int i) {
@@ -54,11 +53,21 @@ public class CriadorArquivos implements Runnable{
 		try {
 			file.createNewFile();
 			System.out.printf("\nArquivo %d.txt criado.", i);
-			lista_files.add(file);
 			return;
 		}
 		catch(IOException e) {
 			System.out.println("\nArquivo .txt não pôde ser criado.");
+			//Tenta de novo.
+			CriadorArquivos criador1 = new CriadorArquivos(i);
+			Thread criador_thread = new Thread(criador1);
+			criador_thread.start();
+		}	
+		catch(Exception e) {
+			System.out.println("\nArquivo .txt não pôde ser criado.");
+			//Tenta de novo.
+			CriadorArquivos criador1 = new CriadorArquivos(i);
+			Thread criador_thread = new Thread(criador1);
+			criador_thread.start();
 		}	
 		return;
 	}
@@ -67,14 +76,15 @@ public class CriadorArquivos implements Runnable{
 	//path = caminho do diretório.
 	
 	//Chamar passando caminho.
-	public ArrayList<File> criarVariosArquivos() throws IOException
+	public void criarVariosArquivos() throws IOException
 	{
-		for(i=0; i<501; i++)
+		for(i=0; i<100000; i++)
 		{
 			CriadorArquivos criador1 = new CriadorArquivos(i);
 			Thread criador_thread = new Thread(criador1);
 			criador_thread.start();
 		}//for
-		return lista_files;
+		status = true;
+		return;
 	}//fim criarVariosArquivos
 }//Fim classe
