@@ -20,6 +20,9 @@ public class LeitorArquivos {
 				linha = leitor.readLine();
 			}
 			leitor.close();
+			System.out.printf("\nArquivo %d lido com sucesso.", i);
+			ApagadorArquivos apagador = new ApagadorArquivos();
+			apagador.deletaArquivo(path, i);
 		} catch(IOException e) {
 			throw new IOException("\nErro na leitura do arquivo.");
 		}
@@ -32,7 +35,7 @@ public class LeitorArquivos {
 	{
 		ArrayList<Integer> lista = new ArrayList<Integer>();
 		int i;
-		for(i = 0; i<11; i++)
+		for(i = 0; i<100000; i++)
 		{
 			lista = lerArquivo(path, i, lista);
 		}

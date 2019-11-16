@@ -3,9 +3,10 @@ package SIN142IOBound;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.*;
+import java.util.Random;
 
 public class CriadorArquivos {
+	private Random gerador = new Random(10);
 	/*
 	 * Método que cria um arquivo com um nome numérico.
 	 * num_arquivo é o parâmetro que define como se chamará o arquivo.
@@ -30,12 +31,13 @@ public class CriadorArquivos {
 	{
 		File file;
 		int i;
-		for(i=0; i<11; i++)
+		for(i=0; i<100000; i++)
 		{
 			file = criarArquivo(i, path);
 			FileWriter writer;
 			writer = new FileWriter(file);
-			writer.write(Integer.toString(i));
+			writer.write(Integer.toString(gerador.nextInt(100001)));
+			System.out.printf("\nArquivo %d escrito =>(caminho: %s).", i, file.toString());
 			writer.close();
 		}//for
 		return;
