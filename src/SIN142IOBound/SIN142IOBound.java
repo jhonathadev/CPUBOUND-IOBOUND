@@ -92,11 +92,10 @@ public class SIN142IOBound {
 			 * Testando classes novas.
 			 * 1 - Cria arquivos.
 			 * 1.5 - Escreve Arquivos.
-			 * 2 - Lê arquivos.
-			 * 3 - Deleta arquivos.
+			 * 2 - Lê e deleta arquivos.
 			 */
 			
-			// 1 - Criando vários arquivos: retorno void.		
+			// 1 - Criando vários arquivos.		
 			CriadorArquivos criador = new CriadorArquivos();
 			CriadorArquivos.setPath(path);
 			criador.criarVariosArquivos();
@@ -131,7 +130,7 @@ public class SIN142IOBound {
 				for(i=5; i>=0; i--) {
 					try {
 						TimeUnit.SECONDS.sleep(1);
-						System.out.printf("\n%d segundo(s) para finalizar escrita...", i);
+						System.out.printf("\n%d segundo(s) para continuar para verificação...", i);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						Thread.currentThread().interrupt();
@@ -162,7 +161,7 @@ public class SIN142IOBound {
 					for(i=3; i>=0; i--) {
 						try {
 							TimeUnit.SECONDS.sleep(1);
-							System.out.printf("\n%d segundo(s) para leitura dos arquivos...", i);
+							System.out.printf("\n%d segundo(s) para leitura e deleção dos arquivos...", i);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							Thread.currentThread().interrupt();
@@ -173,7 +172,7 @@ public class SIN142IOBound {
 			}//fim do while checagem.	
 			checagem = true;
 			
-			// 2 - Lendo arquivos: retorno ArrayList.
+			// 2 - Lendo e deletando arquivos.
 		
 			LeitorArquivos leitor = new LeitorArquivos();
 			LeitorArquivos.lista_files = lista_files;
@@ -198,12 +197,11 @@ public class SIN142IOBound {
 		    
 			// Verificando resultado //
 			printArray(lista_valores);
-			System.out.printf("\nQuantidade de arquivos lidos: %d\n", lista_valores.size());
-//			
+			System.out.printf("\nQuantidade de arquivos lidos: %d\n", lista_valores.size());			
 			for(i=5; i>=0; i--) {
 				try {
 					TimeUnit.SECONDS.sleep(1);
-					System.out.printf("\n%d segundo(s) para finalizar deleção...", i);
+					System.out.printf("\n%d segundo(s) para salvar resultados encontrados...", i);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					Thread.currentThread().interrupt();
@@ -224,17 +222,6 @@ public class SIN142IOBound {
 			}
 		 
 			bw.close();
-			
-			for(i=5; i>=0; i--) {
-				try {
-					TimeUnit.SECONDS.sleep(1);
-					System.out.printf("\n%d segundo(s) para finalizar programa..", i);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					Thread.currentThread().interrupt();
-					e.printStackTrace();
-				}
-			}
 		    System.out.printf("\nTempo de execução total do programa (criação, escrita, leitura e deleção):");
 		    System.out.println(elapsedTime + "ms");
 		    

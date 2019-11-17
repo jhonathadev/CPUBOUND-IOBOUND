@@ -23,7 +23,7 @@ public class LeitorArquivos {
 				linha = leitor.readLine();
 			}
 			leitor.close();
-//			System.out.printf("\nArquivo %d lido com sucesso.", i);
+			System.out.printf("\nArquivo %d lido com sucesso.", i);
 			ApagadorArquivos apagador1 = new ApagadorArquivos(i, lista_files);
 			Thread apagador_thread = new Thread(apagador1);
 			apagador_thread.start();
