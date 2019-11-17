@@ -1,14 +1,17 @@
 package mergesortsequencial;
 
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class MergeSort {
-    private int v[] = new int[1000];//vetor que sera ordenado
-    private int aux[] = new int[1000];//vetor auxiliar
-    private int i=0;//contador
-    
+    private int v[] = new int[500];//vetor que sera ordenado
+    private int aux[] = new int[500];//vetor auxiliar
+    private int i = 0;//contador
+    Random r =  new Random(25); //para gerar numeros aleatorios
     //construtor
     public MergeSort(){
     }
-    
     //metodos get e set
     public void setV(int j, int valor){
         this.v[j] = valor;
@@ -16,22 +19,31 @@ public class MergeSort {
     public int[] getV(){
         return this.v;
     }
-
-    
     //outros metodos
-    public void mergeSort(int ini, int fim){//recebe os indices do primeiro e do ultimo elemento
+    public void mergeSort(int ini, int fim, int num){//recebe os indices do primeiro e do ultimo elemento
         if(ini < fim){
             int meio = ((ini + fim)/2);//variavel para armazenar o meio do vetor
-            mergeSort(ini, meio);//primeira metade do vetor
-            mergeSort(meio+1, fim);//segunda metade do vetor
+            System.out.printf("[Vetor %d] Sort Inicio - Meio [%d , %d]\n",num ,ini ,meio);
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(MergeSort.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            mergeSort(ini, meio, num);//primeira metade do vetor
+            System.out.printf("[Vetor %d] Sort Meio - Fim [%d , %d]\n",num, meio+1, fim);
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(MergeSort.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            mergeSort(meio+1, fim, num);//segunda metade do vetor
             ordenarVetores(ini, meio, fim);
         }
     }
-    public void ordenarVetores(int ini,int meio,int fim){//
+    public void ordenarVetores(int ini, int meio, int fim){
         for(i = ini; i <= fim; i++){//copia o vetor para auxiliar
             aux[i]=v[i];
         }
-
         int n = ini;//recebecomeço do primeiro vetor
         int m = meio+1;//recebe começo do segundo vetor
 
@@ -50,8 +62,8 @@ public class MergeSort {
                 m++;
             }
         }
-            
     }
+    
     public void printVetor(){
         for(i = 0;i < v.length; i++){
             if(i%10 == 0){
@@ -60,5 +72,11 @@ public class MergeSort {
             System.out.printf("%d, ", v[i]);
         }
         System.out.println("");
-    }   
+    } 
+    
+    public void geraVetor(int n){
+        for(i = 0; i < this.getV().length; i++){
+            this.setV(i, (r.nextInt(10000)+n));//atribui novos elementos ao vetor
+        }
+    }
 }
