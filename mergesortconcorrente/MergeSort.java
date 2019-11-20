@@ -1,13 +1,12 @@
 package mergesortconcorrente;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 class MergeSort extends Thread{
-    private int v[] = new int[500]; //vetor que sera ordenado
-    private int aux[] = new int[500]; //vetor auxiliar
+    private int v[] = new int[2000]; //vetor que sera ordenado
+    private int aux[] = new int[2000]; //vetor auxiliar
     private int i = 0; //contador
-    Random r =  new Random(25); //para gerar numeros aleatorios
+    Random r =  new Random(10); //para gerar numeros aleatorios
     
     //construtor
     public MergeSort(){
@@ -27,29 +26,20 @@ class MergeSort extends Thread{
             Thread t1 = new Thread(){//nova thread para ordenar a primeira metade do vetor
                 @Override
                 public void run(){
-                    System.out.printf("[Vetor %d] Sort Inicio - Meio [%d , %d]\n",num,ini,meio);
-                    try {
-                        Thread.sleep(4900);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(MergeSort.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    //System.out.printf("[Vetor %d] Sort Inicio - Meio [%d , %d]\n",num,ini,meio);
                     mergeSortThread(ini, meio, num);
                 }
             };
             Thread t2 = new Thread(){//nova thread para ordeanar a segunda metade do vetor
                 @Override
                 public void run(){
-                    System.out.printf("[Vetor %d] Sort Meio - Fim [%d , %d]\n",num, meio+1,fim);
-                    try {
-                        Thread.sleep(5900);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(MergeSort.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    //System.out.printf("[Vetor %d] Sort Meio - Fim [%d , %d]\n",num, meio+1,fim);
                     mergeSortThread(meio+1, fim, num);
                 }
             };
             t1.start();//iniciar thread 1
             t2.start();//iniciar thread 2
+            
             try{
                 t1.join();//esperar thread 1 terminar
             }catch(InterruptedException e){
@@ -100,9 +90,9 @@ class MergeSort extends Thread{
         System.out.println("");
     }
     
-    public void geraVetor(int n){
+    public void geraVetor(){
         for(i = 0; i < this.getV().length; i++){
-            this.setV(i, (r.nextInt(10000)+n));//atribui novos elementos ao vetor
+            this.setV(i, (r.nextInt(2001)));//atribui novos elementos ao vetor
         }
     }
 }
