@@ -3,8 +3,8 @@ package mergesortconcorrente;
 import java.util.Random;
 
 class MergeSort extends Thread{
-    private int v[] = new int[10000000]; //vetor que sera ordenado
-    private int aux[] = new int[10000000]; //vetor auxiliar
+    private int v[] = new int[6400000]; //vetor que sera ordenado
+    private int aux[] = new int[6400000]; //vetor auxiliar
     private int i = 0; //contador
     Random r =  new Random(10); //para gerar numeros aleatorios
     //construtor
@@ -18,11 +18,11 @@ class MergeSort extends Thread{
         return this.v;
     }
     //metodo para dividir o vetor
-    public void mergeSort(int ini, int fim, int num){//recebe os indices do primeiro e do ultimo elemento
+    public void mergeSort(int ini, int fim){//recebe os indices do primeiro e do ultimo elemento
         if(ini < fim){
             int meio = ((ini + fim)/2);//variavel para armazenar o meio do vetor
-            mergeSort(ini, meio, num);
-            mergeSort(meio+1, fim, num);
+            mergeSort(ini, meio);
+            mergeSort(meio+1, fim);
             ordenarVetores(ini, meio, fim);//ordenar as duas metades dos vetores
         }
     }

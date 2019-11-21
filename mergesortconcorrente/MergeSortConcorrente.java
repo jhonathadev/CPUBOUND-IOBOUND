@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class MergeSortConcorrente extends Thread {
     public static void main(String[] args){
-        // cria 10 novas instâncias de MergeSort
+        // inicializa 4 novas instâncias de MergeSort
         MergeSort m1 = new MergeSort();
         MergeSort m2 = new MergeSort();
         MergeSort m3 = new MergeSort();
@@ -37,7 +37,7 @@ public class MergeSortConcorrente extends Thread {
                         for(th1 = 0; th1 < 25; th1++){
                             System.out.printf("\nIniciando Ordenação do vetor 1 - [ %d ]\n",th1+1);
                             m1.geraVetor();  // gera um novo vetor "aleatorio"
-                            m1.mergeSort(0, m1.getV().length-1, 1);
+                            m1.mergeSort(0, m1.getV().length-1); // classe para ordenar o vetor
                             System.out.printf("\n\nVetor 1 - [ %d ] ordenado\n", th1+1);
                         }
                     }
@@ -49,7 +49,7 @@ public class MergeSortConcorrente extends Thread {
                         for(th2 = 0; th2 < 25; th2++){
                             System.out.printf("\nIniciando Ordenação do vetor 2 - [ %d ]\n",th2+1);
                             m2.geraVetor();  // gera um novo vetor "aleatorio"
-                            m2.mergeSort(0, m2.getV().length-1, 2);
+                            m2.mergeSort(0, m2.getV().length-1); // classe para ordenar o vetor
                             System.out.printf("\n\nVetor 2 - [ %d ] ordenado\n", th2+1);
                         }
                     }
@@ -60,8 +60,8 @@ public class MergeSortConcorrente extends Thread {
                     public void run(){
                         for(th3 = 0; th3 < 25; th3++){
                             System.out.printf("\nIniciando Ordenação do vetor 3 - [ %d ]\n", th3+1);
-                            m3.geraVetor(); 
-                            m3.mergeSort(0, m3.getV().length-1, 3);
+                            m3.geraVetor(); // gera um novo vetor "aleatorio"
+                            m3.mergeSort(0, m3.getV().length-1); // classe para ordenar o vetor
                             System.out.printf("\n\nVetor 3 - [ %d ] ordenado\n", th3+1);
                         }
                     }
@@ -72,8 +72,8 @@ public class MergeSortConcorrente extends Thread {
                     public void run(){
                         for(th4 = 0; th4 < 25; th4++){
                             System.out.printf("\nIniciando Ordenação do vetor 4 - [ %d ]\n", th4+1);
-                            m4.geraVetor(); 
-                            m4.mergeSort(0, m4.getV().length-1, 4);
+                            m4.geraVetor(); // gera um novo vetor "aleatorio"
+                            m4.mergeSort(0, m4.getV().length-1); // classe para ordenar o vetor
                             System.out.printf("\n\nVetor 4 - [ %d ] ordenado\n", th4+1);
                         }
                     }
