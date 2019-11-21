@@ -3,21 +3,21 @@ package mergesortsequencial;
 import java.util.Random;
 
 class MergeSort extends Thread{
-    private int v[] = new int[10000000]; //vetor que sera ordenado
-    private int aux[] = new int[10000000]; //vetor auxiliar
+    private int v[] = new int[6400000]; // vetor que sera ordenado
+    private int aux[] = new int[6400000]; // vetor auxiliar
     private int i = 0; //contador
-    Random r =  new Random(10); //para gerar numeros aleatorios
-    //construtor
+    Random r =  new Random(10); // gera numeros aleatorios
+    // construtor
     public MergeSort(){
     }
-    //metodos get e set
+    // metodos get e set
     public void setV(int j, int valor){
         this.v[j] = valor;
     }
     public int[] getV(){
         return this.v;
     }
-    //metodo para dividir o vetor
+    // metodo para dividir o vetor
     public void mergeSort(int ini, int fim, int num){//recebe os indices do primeiro e do ultimo elemento
         if(ini < fim){
             int meio = ((ini + fim)/2);//variavel para armazenar o meio do vetor
@@ -31,19 +31,19 @@ class MergeSort extends Thread{
         for(i = ini; i <= fim; i++){//copia o vetor para auxiliar
             aux[i]=v[i];
         }
-        int n = ini;//recebecomeço do primeiro vetor
-        int m = meio+1;//recebe começo do segundo vetor
-        for(i = ini; i <= fim; i++){//verifica qual elemento entre os vetores e menor e copia para vetor principal
-            if(n > meio){//primeiro vetor acabou
+        int n = ini; // recebe começo do primeiro vetor
+        int m = meio+1; // recebe começo do segundo vetor
+        for(i = ini; i <= fim; i++){ // verifica qual elemento entre os vetores e menor e copia para vetor principal
+            if(n > meio){ // primeiro vetor acabou
                 v[i] = aux[m];
                 m++;
-            }else if(m > fim){//segundo vetor acabou
+            }else if(m > fim){ // segundo vetor acabou
                 v[i] = aux[n];
                 n++;
-            }else if(aux[n] < aux[m]){//elemento do primeiro vetor e maior que do segundo
+            }else if(aux[n] < aux[m]){ // elemento do primeiro vetor e maior que do segundo
                 v[i] = aux[n];
                 n++;
-            }else{//elemento do segundo vetor e maior que do primeiro
+            }else{ // elemento do segundo vetor e maior que do primeiro
                 v[i] = aux[m];
                 m++;
             }
