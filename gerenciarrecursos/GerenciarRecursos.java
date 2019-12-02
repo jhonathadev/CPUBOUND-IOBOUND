@@ -2,16 +2,19 @@ package gerenciarrecursos;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class GerenciarRecursos extends Thread{
-    public static void main(String[] args) throws FileNotFoundException, InterruptedException {
+    public static void main(String[] args) throws FileNotFoundException, InterruptedException, IOException{
        
         //String path = System.getProperty("user.dir");
         //System.out.println(path);
         //Video v1 = new Video();
-        Scanner scanner = new Scanner(new FileReader("atualizarValores.txt")).useDelimiter("\\||\\n");
-        Scanner scanner2 = new Scanner(new FileReader("diminuirValores.txt")).useDelimiter("\\||\\n");
+    	FileReader atualizar = new FileReader("atualizarValores.txt");
+    	FileReader diminuir = new FileReader("diminuirValores.txt");
+        Scanner scanner = new Scanner(atualizar).useDelimiter("\\||\\n");
+        Scanner scanner2 = new Scanner(diminuir).useDelimiter("\\||\\n");
         LeitorEscritor l1 = new LeitorEscritor("A");
 
         l1.start();
@@ -32,9 +35,13 @@ public class GerenciarRecursos extends Thread{
         
         l1.stopSemaphoro();
 
+	    atualizar.close();
+	    diminuir.close();
+        
         System.out.println("views:" + l1.v1.getViews());
         System.out.println("likes:" + l1.v1.getLikes());
         System.out.println("dislikes:" + l1.v1.getDislikes()); 
+        
         
     }    
 }
