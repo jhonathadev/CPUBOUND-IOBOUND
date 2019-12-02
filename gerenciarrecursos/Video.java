@@ -5,6 +5,7 @@ public class Video{
     private int dislikes = 0;
     private int views = 0;
    
+    /*
     public synchronized void addAll(int likes, int views, int dislikes){
         this.addViews(views);
         this.addLikes(likes);
@@ -16,28 +17,29 @@ public class Video{
         this.removeLikes(likes);
         this.removeDislikes(dislikes);
     }
+    */
     
-    public void removeLikes(int likes){
+    public synchronized void removeLikes(int likes){
         this.likes -= likes;
     }
     
-    public void removeViews(int views){
+    public synchronized void removeViews(int views){
         this.views -= views;
     }
     
-    public void removeDislikes(int dislikes){
+    public synchronized void removeDislikes(int dislikes){
         this.dislikes -= dislikes;
     }
     
-    public void addLikes(int likes){
+    public synchronized void addLikes(int likes){
         this.likes += likes;
     }
     
-    public void addDislikes(int dislikes){
+    public synchronized void addDislikes(int dislikes){
         this.dislikes += dislikes;
     }
     
-    public void addViews(int views){
+    public synchronized void addViews(int views){
         this.views += views;
     }
     
