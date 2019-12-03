@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.util.concurrent.*;
 
 public class GerenciarRecursos {
-
+	public static Video video = new Video();
     static Scanner scanner = new Scanner(System.in);
     static Scanner scanner2 = new Scanner(System.in);
 
@@ -15,61 +15,33 @@ public class GerenciarRecursos {
 
         //String path = System.getProperty("user.dir");
         //System.out.println(path);
-        //Video v1 = new Video();
+//        Video v1 = new Video();
 
         FileReader atualizar = new FileReader("atualizarValores.txt");
         FileReader diminuir = new FileReader("diminuirValores.txt");
         GerenciarRecursos.scanner = new Scanner(atualizar).useDelimiter("\\||\\n");
         GerenciarRecursos.scanner2 = new Scanner(diminuir).useDelimiter("\\||\\n");
-        
+        int i, num_threads;
         Semaphore sem = new Semaphore(1);
-        LeitorEscritor l1 = new LeitorEscritor(sem);
-        LeitorEscritor l2 = new LeitorEscritor(sem);
-        LeitorEscritor l3 = new LeitorEscritor(sem);
-        LeitorEscritor l4 = new LeitorEscritor(sem);
-        LeitorEscritor l5 = new LeitorEscritor(sem);
-        LeitorEscritor l6 = new LeitorEscritor(sem);
-        LeitorEscritor l7 = new LeitorEscritor(sem);
-        LeitorEscritor l8 = new LeitorEscritor(sem);
-        LeitorEscritor l9 = new LeitorEscritor(sem);
-        LeitorEscritor l10 = new LeitorEscritor(sem);
+        LeitorEscritor l1 = new LeitorEscritor();
  
         l1.start();
         l1.join();
         
-        l2.start();
-        l2.join();
+        for(i=0; i<LeitorEscritor.likes_vetor.size(); i++) {
+        	System.out.printf("\n%d", LeitorEscritor.likes_vetor.get(i));
+        }
         
-        l3.start();
-        l3.join();
-        
-        l4.start();
-        l4.join();
-        
-        l5.start();
-        l5.join();
-        
-        l6.start();
-        l6.join();
-        
-        l7.start();
-        l7.join();
-        
-        l8.start();
-        l8.join();
-        
-        l9.start();
-        l9.join();
-        
-        l10.start();
-        l10.join();
-        
+        for(num_threads = 0; num_threads<10; num_threads++) {
+        	AtualizarLikes like_updater = new AtualizarLikes(sem, 0, num_threads);
+        	like_updater.start();
+        }
         
         atualizar.close();
         diminuir.close();
         
 //        System.out.println("views:" + l1.v1.getViews());
-//        System.out.println("likes:" + l1.v1.getLikes());
+        System.out.println("likes:" + video.getLikes());
 //        System.out.println("dislikes:" + l1.v1.getDislikes()); 
         
         
