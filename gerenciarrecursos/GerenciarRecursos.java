@@ -33,43 +33,45 @@ public class GerenciarRecursos {
         LeitorEscritor l8 = new LeitorEscritor(sem);
         LeitorEscritor l9 = new LeitorEscritor(sem);
         LeitorEscritor l10 = new LeitorEscritor(sem);
-
+ 
         l1.start();
         l1.join();
-
+        
         l2.start();
         l2.join();
-
+        
         l3.start();
         l3.join();
-
+        
         l4.start();
         l4.join();
-
+        
         l5.start();
         l5.join();
-
+        
         l6.start();
         l6.join();
-
+        
         l7.start();
         l7.join();
-
+        
         l8.start();
         l8.join();
-
+        
         l9.start();
         l9.join();
-
+        
         l10.start();
         l10.join();
-
+        
+        
         atualizar.close();
         diminuir.close();
-
-        System.out.println("\n.:Valores finais:.\n");
-        System.out.println("Views:" + l1.v1.getViews());
-        System.out.println("Likes:" + l1.v1.getLikes());
-        System.out.println("Dislikes:" + l1.v1.getDislikes()); 
-    }
+        
+//        System.out.println("views:" + l1.v1.getViews());
+//        System.out.println("likes:" + l1.v1.getLikes());
+//        System.out.println("dislikes:" + l1.v1.getDislikes()); 
+        
+        
+    }    
 }
