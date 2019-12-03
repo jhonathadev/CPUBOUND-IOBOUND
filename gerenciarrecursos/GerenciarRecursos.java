@@ -2,39 +2,74 @@ package gerenciarrecursos;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.concurrent.*;
 
-public class GerenciarRecursos extends Thread{
-    public static void main(String[] args) throws FileNotFoundException, InterruptedException {
-       
+public class GerenciarRecursos {
+
+    static Scanner scanner = new Scanner(System.in);
+    static Scanner scanner2 = new Scanner(System.in);
+
+    public static void main(String[] args) throws FileNotFoundException, InterruptedException, IOException {
+
         //String path = System.getProperty("user.dir");
         //System.out.println(path);
         //Video v1 = new Video();
-        Scanner scanner = new Scanner(new FileReader("atualizarValores.txt")).useDelimiter("\\||\\n");
-        Scanner scanner2 = new Scanner(new FileReader("diminuirValores.txt")).useDelimiter("\\||\\n");
-        LeitorEscritor l1 = new LeitorEscritor("A");
+
+        FileReader atualizar = new FileReader("atualizarValores.txt");
+        FileReader diminuir = new FileReader("diminuirValores.txt");
+        GerenciarRecursos.scanner = new Scanner(atualizar).useDelimiter("\\||\\n");
+        GerenciarRecursos.scanner2 = new Scanner(diminuir).useDelimiter("\\||\\n");
+        
+        Semaphore sem = new Semaphore(1);
+        LeitorEscritor l1 = new LeitorEscritor(sem);
+        LeitorEscritor l2 = new LeitorEscritor(sem);
+        LeitorEscritor l3 = new LeitorEscritor(sem);
+        LeitorEscritor l4 = new LeitorEscritor(sem);
+        LeitorEscritor l5 = new LeitorEscritor(sem);
+        LeitorEscritor l6 = new LeitorEscritor(sem);
+        LeitorEscritor l7 = new LeitorEscritor(sem);
+        LeitorEscritor l8 = new LeitorEscritor(sem);
+        LeitorEscritor l9 = new LeitorEscritor(sem);
+        LeitorEscritor l10 = new LeitorEscritor(sem);
 
         l1.start();
- 
-        while(scanner.hasNext() && scanner2.hasNext()){
-            if(!l1.getReader()){
-                l1.waitColorChange();
-            }else{
-                l1.addViews(scanner.nextInt());
-                l1.removeViews(scanner2.nextInt());
-                l1.addLikes(scanner.nextInt());
-                l1.removeLikes(scanner2.nextInt());
-                l1.addDislikes(scanner.nextInt());
-                l1.removeDislikes(scanner2.nextInt());        
-                l1.waitColorChange();
-            }
-        }
-        
-        l1.stopSemaphoro();
+        l1.join();
 
-        System.out.println("views:" + l1.v1.getViews());
-        System.out.println("likes:" + l1.v1.getLikes());
-        System.out.println("dislikes:" + l1.v1.getDislikes()); 
-        
-    }    
+        l2.start();
+        l2.join();
+
+        l3.start();
+        l3.join();
+
+        l4.start();
+        l4.join();
+
+        l5.start();
+        l5.join();
+
+        l6.start();
+        l6.join();
+
+        l7.start();
+        l7.join();
+
+        l8.start();
+        l8.join();
+
+        l9.start();
+        l9.join();
+
+        l10.start();
+        l10.join();
+
+        atualizar.close();
+        diminuir.close();
+
+        System.out.println("\n.:Valores finais:.\n");
+        System.out.println("Views:" + l1.v1.getViews());
+        System.out.println("Likes:" + l1.v1.getLikes());
+        System.out.println("Dislikes:" + l1.v1.getDislikes()); 
+    }
 }
