@@ -1,10 +1,11 @@
 package gerenciarrecursos;
 
-import java.io.FileNotFoundException;
+import java.util.concurrent.Semaphore;
 import java.io.FileReader;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.concurrent.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class GerenciarRecursos {
 	public static Video video = new Video();
@@ -12,37 +13,42 @@ public class GerenciarRecursos {
     static Scanner scanner2 = new Scanner(System.in);
 
     public static void main(String[] args) throws FileNotFoundException, InterruptedException, IOException {
-
-        //String path = System.getProperty("user.dir");
-        //System.out.println(path);
-//        Video v1 = new Video();
-
         FileReader atualizar = new FileReader("atualizarValores.txt");
         FileReader diminuir = new FileReader("diminuirValores.txt");
         GerenciarRecursos.scanner = new Scanner(atualizar).useDelimiter("\\||\\n");
         GerenciarRecursos.scanner2 = new Scanner(diminuir).useDelimiter("\\||\\n");
-        int i, num_threads;
-        Semaphore sem = new Semaphore(1);
+        int i = 0, x = 0, num_threads;
+        Semaphore sem = new Semaphore(1, true);
+        Semaphore sem2 = new Semaphore(1, true);
         LeitorEscritor l1 = new LeitorEscritor();
- 
+        
+        //Lê arquivos
         l1.start();
         l1.join();
         
+        //Verifica se a leitura foi correta.
         for(i=0; i<LeitorEscritor.likes_vetor.size(); i++) {
         	System.out.printf("\n%d", LeitorEscritor.likes_vetor.get(i));
         }
         
-        for(num_threads = 0; num_threads<10; num_threads++) {
-        	AtualizarLikes like_updater = new AtualizarLikes(sem, 0, num_threads);
-        	like_updater.start();
+        System.out.println();
+        AtualizarAtributos.i = 0;
+        DecrementaAtributos.i = 0;
+        for(i=0; i<10; i++) {
+        	AtualizarAtributos att_updater = new AtualizarAtributos(sem, i+1);
+        	DecrementaAtributos invalid_att_updater = new DecrementaAtributos(sem, i+11);
+        	att_updater.start();
+        	invalid_att_updater.start();
         }
+        
+        Thread.sleep(300);
         
         atualizar.close();
         diminuir.close();
         
-//        System.out.println("views:" + l1.v1.getViews());
+        System.out.println("views:" + video.getViews());
         System.out.println("likes:" + video.getLikes());
-//        System.out.println("dislikes:" + l1.v1.getDislikes()); 
+        System.out.println("dislikes:" + video.getDislikes()); 
         
         
     }    

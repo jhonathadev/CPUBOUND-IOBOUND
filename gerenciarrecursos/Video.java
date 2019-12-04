@@ -5,27 +5,27 @@ public class Video{
     private int dislikes = 0;
     private int views = 0;
    
-    public synchronized void removeLikes(int likes){
+    public void removeLikes(int likes){
         this.likes -= likes;
     }
     
-    public synchronized void removeViews(int views){
+    public void removeViews(int views){
         this.views -= views;
     }
     
-    public synchronized void removeDislikes(int dislikes){
+    public void removeDislikes(int dislikes){
         this.dislikes -= dislikes;
     }
     
-    public synchronized void addLikes(int likes){
+    public void addLikes(int likes){
         this.likes += likes;
     }
     
-    public synchronized void addDislikes(int dislikes){
+    public void addDislikes(int dislikes){
         this.dislikes += dislikes;
     }
     
-    public synchronized void addViews(int views){
+    public void addViews(int views){
         this.views += views;
     }
     
