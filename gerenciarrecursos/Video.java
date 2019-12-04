@@ -4,6 +4,10 @@ public class Video{
     private int likes = 0;
     private int dislikes = 0;
     private int views = 0;
+    
+    public synchronized void imprimeVideo() {
+    	System.out.println("|Views:" + "\t" + views +"\t" + "|Likes:" + "\t" + likes + "\t" + "|Dislikes:" + "  " + dislikes + "|");
+    }
    
     public void removeLikes(int likes){
         this.likes -= likes;

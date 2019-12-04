@@ -50,7 +50,7 @@ public class GerenciarRecursos {
         
         atualizar.close();
         diminuir.close();
-        System.out.println();
+        System.out.println("\n" + "Resultados finais:");
         System.out.println("views:" + video.getViews());
         System.out.println("likes:" + video.getLikes());
         System.out.println("dislikes:" + video.getDislikes()); 

@@ -27,7 +27,6 @@ public class DecrementaAtributos extends Thread{
 					
 					j = i;
 					i += 1;
-					sem2.release();
 					
 					//Likes -
 					likes = LeitorEscritor.likes_vetor_r.get(j);
@@ -39,11 +38,15 @@ public class DecrementaAtributos extends Thread{
 					dislikes = LeitorEscritor.dislikes_vetor_r.get(j);
 					
 					GerenciarRecursos.video.removeLikes(likes);
-					System.out.println(likes + " removidos em Likes na thread " + thread_n);
+//					System.out.println(likes + " removidos em Likes na thread " + thread_n);
 					GerenciarRecursos.video.removeViews(views);
-					System.out.println(views + " removidos em Views na thread " + thread_n);
+//					System.out.println(views + " removidos em Views na thread " + thread_n);
 					GerenciarRecursos.video.removeDislikes(dislikes);
-					System.out.println(dislikes + " removidos em Dislikes na thread " + thread_n);
+//					System.out.println(dislikes + " removidos em Dislikes na thread " + thread_n);
+					
+					GerenciarRecursos.video.imprimeVideo();
+					
+					sem2.release();
 				}//if
 				else {
 					sem2.release();

@@ -26,7 +26,6 @@ public class AtualizarAtributos extends Thread{
 					
 					j = i;
 					i += 1;
-					sem.release();
 					
 					//Likes +
 					likes = LeitorEscritor.likes_vetor.get(j);
@@ -37,13 +36,16 @@ public class AtualizarAtributos extends Thread{
 					//Dislikes +
 					dislikes = LeitorEscritor.dislikes_vetor.get(j);
 					
-					
 					GerenciarRecursos.video.addLikes(likes);
-					System.out.println(likes + " adicionados em Likes na thread " + thread_n);
+//					System.out.println(likes + " adicionados em Likes na thread " + thread_n);
 					GerenciarRecursos.video.addViews(views);
-					System.out.println(views + " adicionados em Views na thread " + thread_n);
+//					System.out.println(views + " adicionados em Views na thread " + thread_n);
 					GerenciarRecursos.video.addDislikes(dislikes);
-					System.out.println(dislikes + " adicionados em Dislikes na thread " + thread_n);
+//					System.out.println(dislikes + " adicionados em Dislikes na thread " + thread_n);
+					
+					GerenciarRecursos.video.imprimeVideo();
+					
+					sem.release();
 				}//if i
 				else {
 					sem.release();
