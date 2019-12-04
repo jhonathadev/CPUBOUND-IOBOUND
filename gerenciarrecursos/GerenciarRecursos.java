@@ -27,9 +27,14 @@ public class GerenciarRecursos {
         l1.join();
         
         //Verifica se a leitura foi correta.
-        for(i=0; i<LeitorEscritor.likes_vetor.size(); i++) {
-        	System.out.printf("\n%d", LeitorEscritor.likes_vetor.get(i));
-        }
+//        for(i=0; i<LeitorEscritor.likes_vetor.size(); i++) {
+//        	System.out.printf("\n%d %d %d", LeitorEscritor.views_vetor.get(i), LeitorEscritor.likes_vetor.get(i), LeitorEscritor.dislikes_vetor.get(i));
+//        }
+        
+//        for(i=0; i<LeitorEscritor.likes_vetor.size(); i++) {
+//        	System.out.printf("\n%d %d %d", LeitorEscritor.views_vetor_r.get(i), LeitorEscritor.likes_vetor_r.get(i), LeitorEscritor.dislikes_vetor_r.get(i));
+//        }
+        
         
         System.out.println();
         AtualizarAtributos.i = 0;
@@ -45,7 +50,7 @@ public class GerenciarRecursos {
         
         atualizar.close();
         diminuir.close();
-        
+        System.out.println();
         System.out.println("views:" + video.getViews());
         System.out.println("likes:" + video.getLikes());
         System.out.println("dislikes:" + video.getDislikes()); 
