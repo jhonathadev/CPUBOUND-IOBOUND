@@ -15,3 +15,11 @@ MANIFEST.MF
 RemoteSystemsTempFiles
 bin
 /arquivos/
+/teste/nbproject/private/
+/teste/build/
+/WebDriver/nbproject/private/
+/GerenciarRecursos/nbproject/private/
+/GerenciarRecursos/build/
+/GerenciarRecursos/dist/
+/App/nbproject/private/
+/App/build/
